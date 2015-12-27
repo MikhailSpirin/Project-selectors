@@ -18,10 +18,10 @@ import static com.wix.spirinmikhail.TestHelper.Selectors;
 //
 // TODO:
 // -- more strict way of naming selectors
-// -- unite css and xpath selectors in one hashmap (by storing not text, but 'By.byCssSelector(...)')
+// -- unite css and xpath selectors in one hashmap (by storing not text, but 'By.byCssSelector(...)', By.xpath, parameters for one key)
 // -- add parameters to checked elements - for categories, for comments
 // -- improve way to get quantity of pages with comments (to enhance verifyThatCommentIsPresent)
-//
+// -- To do some wrappers for simple methods with simple selectors
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
