@@ -63,16 +63,16 @@ public class SelectorTest {
         System.out.println("Select first comment");
         testHelper.getElement(Selectors.FIRST_COMMENT_CHECKBOX).click();
 
-        System.out.println("");
+        System.out.println("Save text of the first comment");
         String sourceCommentText = testHelper.getElement(Selectors.FIRST_COMMENT_TEXT).getText();
 
-        System.out.println("Find button/link 'Duplicate...' and click it");
+        System.out.println("Duplicate selected comment");
         testHelper.getElement(Selectors.DUPLICATE_BUTTON).click();
 
-        System.out.println("Find text-field 'Number' and delete number from it");
+        System.out.println("In opened popup delete number (for automatic generation");
         testHelper.getElement(Selectors.NUMBER_TEXT_FIELD).clear();
 
-        System.out.println("Find 'Save and Return' and click it");
+        System.out.println("Click 'Save and Return' button");
         testHelper.getElement(Selectors.SAVE_RETURN_BUTTON).click();
 
         System.out.println("Verify that copied comment exist");
@@ -83,18 +83,18 @@ public class SelectorTest {
     public void changeCommentTest() {
         final String newCommentText = "New Name For Comment";
 
-        System.out.println("Find first comment's checkbox and check it");
+        System.out.println("Select first comment");
         testHelper.getElement(Selectors.FIRST_COMMENT_CHECKBOX).click();
 
-        System.out.println("Find button/link 'Edit...' and click it");
+        System.out.println("Edit selected comment - open popup");
         testHelper.getElement(Selectors.EDIT_BUTTON).click();
 
-        System.out.println("Find text-field 'Comment' and change it");
+        System.out.println("Change text for comment");
         WebElement commentField = testHelper.getElement(Selectors.COMMENT_TEXT_FIELD);
         commentField.clear();
         commentField.sendKeys(newCommentText);
 
-        System.out.println("Find 'Save and Return' and click it");
+        System.out.println("Click 'Save and Return' button");
         testHelper.getElement(Selectors.SAVE_RETURN_BUTTON).click();
 
         System.out.println("Verify that copied comment exist");
@@ -103,16 +103,16 @@ public class SelectorTest {
 
     @Test
     public void deleteCommentTest() {
-        System.out.println("Find first comment's checkbox and check it");
+        System.out.println("Select first comment");
         testHelper.getElement(Selectors.FIRST_COMMENT_CHECKBOX).click();
 
         System.out.println("Get first comment text");
         String commentText = testHelper.getElement(Selectors.FIRST_COMMENT_TEXT).getText();
 
-        System.out.println("Find button/link 'Delete...' and click it");
+        System.out.println("Delete selected comment");
         testHelper.getElement(Selectors.DELETE_BUTTON).click();
 
-        System.out.println("Press 'Yes' on popup");
+        System.out.println("Approve deletion operation");
         testHelper.getElement(Selectors.DELETE_POPUP_YES_BUTTON).click();
 
         System.out.println("Verify that deleted comment is not exist");
