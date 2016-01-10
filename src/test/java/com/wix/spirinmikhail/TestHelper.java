@@ -187,4 +187,18 @@ public class TestHelper {
         }
         return true;
     }
+
+    public boolean verifyDividerWeight(String expectedWeight) {
+        WebElement divider = getElement(SelectorsKeys.DIVIDER);
+        String currentWeight = divider.getCssValue("height");
+        return (currentWeight.equals(expectedWeight));
+    }
+
+    public boolean verifyHeaderUnderlined() {
+        List<WebElement> headers = getElements(SelectorsKeys.HEADERS);
+        for (WebElement header : headers) {
+            if(!header.getCssValue("text-decoration").equals("underline")) return false;
+        }
+        return true;
+    }
 }

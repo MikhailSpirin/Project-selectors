@@ -40,6 +40,8 @@ public class SelectorsDataBase {
         DROPDOWN_STATUS,
         FILTERING_BUTTON,
         STATUS_FIELD,
+        DIVIDER,
+        HEADERS,
     }
 
     private static Map<SelectorsKeys, Map> selectorsBase = new HashMap<SelectorsKeys, Map>(){{
@@ -165,6 +167,16 @@ public class SelectorsDataBase {
 
         put(SelectorsKeys.STATUS_FIELD, new HashMap<String, String>() {{
             put("CSS", "div.commenteditor input#Active");
+            put("XPATH", "");
+        }});
+
+        put(SelectorsKeys.DIVIDER, new HashMap<String, String>() {{
+            put("CSS", "section#main div hr");
+            put("XPATH", "");
+        }});
+
+        put(SelectorsKeys.HEADERS, new HashMap<String, String>() {{
+            put("CSS", "tr.webgrid-header th a");
             put("XPATH", "");
         }});
 

@@ -306,12 +306,20 @@ public class SelectorTest {
     //task 11 weight of divider between filter and menu
     @Test
     public void verifyDividerWeightTest() {
+        final String expectedWeight = "2px";
+
+        System.out.println("Verify that divider weight is " + expectedWeight);
+        assertTrue("Divider weight is different",
+                testHelper.verifyDividerWeight(expectedWeight));
 
     }
 
     //task 12 checking that headers number,  comment text, active are underlined
     @Test
     public void verifyHeadersUnderlinedTest() {
+        System.out.println("Verify that headers are underlined");
+        assertTrue("Headers are not underlined",
+                testHelper.verifyHeaderUnderlined());
     }
 
 
