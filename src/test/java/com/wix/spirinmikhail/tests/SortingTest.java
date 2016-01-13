@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.openqa.selenium.WebElement;
 
 import static org.junit.Assert.assertTrue;
+import static com.wix.spirinmikhail.helpers.SelectorsDataBase.TblSel;
 
 /**
  * Created by mikhails on 13.01.2016
@@ -26,11 +27,11 @@ public class SortingTest {
     @Test
     public void verifyNumberSortByNumberTest() {
         System.out.println("Click on 'sort by number'");
-        WebElement link = testHelper.getElement(SelectorsDataBase.SelectorsKeys.LINK_FOR_SORTING, "NumberValue");
+        WebElement link = testHelper.getElement(SelectorsDataBase.TblSel.LINKS_FOR_SORTING, "NumberValue");
         link.click();
 
         System.out.println("If sorting is ascending, click again - to descending");
-        link = testHelper.getElement(SelectorsDataBase.SelectorsKeys.LINK_FOR_SORTING, "NumberValue");
+        link = testHelper.getElement(TblSel.LINKS_FOR_SORTING, "NumberValue");
         if(link.getAttribute("href").contains("ASC")) link.click();
 
         System.out.println("Verify that comments are sorted by number");
@@ -42,11 +43,11 @@ public class SortingTest {
     @Test
     public void verifyNumberSortByCommentTextTest() {
         System.out.println("Click on 'sort by comment text'");
-        WebElement link = testHelper.getElement(SelectorsDataBase.SelectorsKeys.LINK_FOR_SORTING, "Text");
+        WebElement link = testHelper.getElement(TblSel.LINKS_FOR_SORTING, "Text");
         link.click();
 
         System.out.println("If sorting is ascending, click again - to descending");
-        link = testHelper.getElement(SelectorsDataBase.SelectorsKeys.LINK_FOR_SORTING, "Text");
+        link = testHelper.getElement(TblSel.LINKS_FOR_SORTING, "Text");
         if(link.getAttribute("href").contains("ASC")) link.click();
 
         System.out.println("Verify that comments are sorted by comment text");
@@ -58,11 +59,11 @@ public class SortingTest {
     @Test
     public void verifyNumberSortByActiveTest() {
         System.out.println("Click on sorting by active");
-        WebElement link = testHelper.getElement(SelectorsDataBase.SelectorsKeys.LINK_FOR_SORTING, "Active");
+        WebElement link = testHelper.getElement(TblSel.LINKS_FOR_SORTING, "Active");
         link.click();
 
         System.out.println("If sorting is ascending, click again - to descending");
-        link = testHelper.getElement(SelectorsDataBase.SelectorsKeys.LINK_FOR_SORTING, "Active");
+        link = testHelper.getElement(TblSel.LINKS_FOR_SORTING, "Active");
         if(link.getAttribute("href").contains("ASC")) link.click();
 
         System.out.println("Verify that comments are sorted by number");

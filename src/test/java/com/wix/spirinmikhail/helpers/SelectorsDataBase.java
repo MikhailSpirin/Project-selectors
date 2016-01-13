@@ -10,15 +10,6 @@ import java.util.Map;
  */
 public class SelectorsDataBase {
 
-    public enum SelectorsKeys {
-        FIRST_COMMENT_CHECKBOX,
-        FIRST_COMMENT_TEXT,
-
-
-
-        LINK_FOR_SORTING,
-    }
-
     public enum MainPg {
         NAV_BUTTON,
         DROPDOWN_CATEGORY,
@@ -31,17 +22,26 @@ public class SelectorsDataBase {
     }
 
     public enum EditPg {
-        COMMENT_TEXT_FIELD,
-        CAT_ZERO_CHECKBOX,
-        ADD_SELECTED_CATEGORY,
-        SAVE_RETURN_BUTTON,
-        NUMBER_TEXT_FIELD,
-        DELETE_POPUP_YES_BUTTON,
         ERROR_MESSAGE_FIELD,
+        COMMENT_TEXT_FIELD,
+        NUMBER_TEXT_FIELD,
         STATUS_FIELD,
+
+        CAT_ZERO_CHECKBOX,
+        ADD_SELECTED_CATEGORY_BUTTON,
+        SAVE_RETURN_BUTTON,
+
+        DELETE_POPUP_YES_BUTTON,
     }
 
     public enum TblSel {
+        // links for sorting in header
+        LINKS_FOR_SORTING,
+
+        // Should be obsolete after getting first comment with conditional
+        FIRST_COMMENT_CHECKBOX,
+        FIRST_COMMENT_TEXT,
+
         // for table iteration
         COMMENT_LINE,
         COMMENT_NUMBER_IN_LINE,
@@ -49,10 +49,10 @@ public class SelectorsDataBase {
         COMMENT_ACTIVE_IN_LINE,
         COMMENT_CATEGORIES_IN_LINE,
 
-        // table nvigation
-        NEXT_PAGE,
-        FIRST_PAGE,
-        ALL_PAGINATION_ELEMENTS_WITHOUT_TEXT,
+        // table pagination
+        PAGINATION_NEXT_PAGE,
+        PAGINATION_FIRST_PAGE,
+        PAGINATION_ELEMENTS_WITHOUT_TEXT,
     }
 
     private static Map<Enum, Map> selectorsBase = new HashMap<Enum, Map>(){{
@@ -71,7 +71,7 @@ public class SelectorsDataBase {
             put("XPATH", "//div[@id='alvailablecategories']/div[contains(.,'Cat0')]/input[@id='Categories']");
         }});
 
-        put(EditPg.ADD_SELECTED_CATEGORY, new HashMap<String, String>() {{
+        put(EditPg.ADD_SELECTED_CATEGORY_BUTTON, new HashMap<String, String>() {{
             put("CSS", "div.selectbuttons input[value='>']");
             put("XPATH", "//div[@class='selectbuttons']/input[@value='>']");
         }});
@@ -106,12 +106,12 @@ public class SelectorsDataBase {
             put("XPATH", "td[@class='categorycolumn']");
         }});
 
-        put(SelectorsKeys.FIRST_COMMENT_CHECKBOX, new HashMap<String, String>() {{
+        put(TblSel.FIRST_COMMENT_CHECKBOX, new HashMap<String, String>() {{
             put("CSS", "tbody tr:nth-of-type(1) td.checkedcolumn input[type=checkbox]");
             put("XPATH", "//tbody/tr[1]/td[@class='checkedcolumn']/input[@name='SelectedId']");
         }});
 
-        put(SelectorsKeys.FIRST_COMMENT_TEXT, new HashMap<String, String>() {{
+        put(TblSel.FIRST_COMMENT_TEXT, new HashMap<String, String>() {{
             put("CSS", "tbody tr:nth-of-type(1) td.textcolumn");
             put("XPATH", "//tbody/tr[1]/td[@class='textcolumn']");
         }});
@@ -126,17 +126,17 @@ public class SelectorsDataBase {
             put("XPATH", "//div[@class='ui-dialog-buttonset']/button[1]");
         }});
 
-        put(TblSel.NEXT_PAGE, new HashMap<String, String>() {{
+        put(TblSel.PAGINATION_NEXT_PAGE, new HashMap<String, String>() {{
             put("CSS", "tr.webgrid-footer a:last-child");
             put("XPATH", "//tr[@class='webgrid-footer']/td/*[last()]");
         }});
 
-        put(TblSel.FIRST_PAGE, new HashMap<String, String>() {{
+        put(TblSel.PAGINATION_FIRST_PAGE, new HashMap<String, String>() {{
             put("CSS", "tr.webgrid-footer a[href='/?page=1']");
             put("XPATH", "//tr[@class='webgrid-footer']/td/*[contains(., '1')]");
         }});
 
-        put(TblSel.ALL_PAGINATION_ELEMENTS_WITHOUT_TEXT, new HashMap<String, String>() {{
+        put(TblSel.PAGINATION_ELEMENTS_WITHOUT_TEXT, new HashMap<String, String>() {{
             put("CSS", "tr.webgrid-footer td *");
             put("XPATH", "//tr[@class='webgrid-footer']/td/*");
         }});
@@ -156,7 +156,7 @@ public class SelectorsDataBase {
             put("XPATH", "//div[@id='errorfield']");
         }});
 
-        put(SelectorsKeys.LINK_FOR_SORTING, new HashMap<String, String>() {{
+        put(TblSel.LINKS_FOR_SORTING, new HashMap<String, String>() {{
             put("CSS", "table.webgrid thead tr.webgrid-header th a[href^='/?sort=%s']");
             put("XPATH", "");
         }});
@@ -183,11 +183,6 @@ public class SelectorsDataBase {
 
         put(MainPg.DIVIDER, new HashMap<String, String>() {{
             put("CSS", "section#main div hr");
-            put("XPATH", "");
-        }});
-
-        put(MainPg.HEADERS, new HashMap<String, String>() {{
-            put("CSS", "tr.webgrid-header th a");
             put("XPATH", "");
         }});
     }};

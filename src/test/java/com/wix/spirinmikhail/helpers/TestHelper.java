@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Properties;
 import static com.wix.spirinmikhail.helpers.SelectorsDataBase.MainPg;
 import static com.wix.spirinmikhail.helpers.SelectorsDataBase.EditPg;
-import static com.wix.spirinmikhail.helpers.SelectorsDataBase.SelectorsKeys;
 import static com.wix.spirinmikhail.helpers.SelectorsDataBase.TblSel;
 
 /**
@@ -73,7 +72,7 @@ public class TestHelper {
         String currentCategories;
 
         driver.get("http://comments.azurewebsites.net/");
-        Integer pages = getElements(TblSel.ALL_PAGINATION_ELEMENTS_WITHOUT_TEXT).size();
+        Integer pages = getElements(TblSel.PAGINATION_ELEMENTS_WITHOUT_TEXT).size();
         for (int i = 0; i < pages; i++) {
             for (WebElement item : getElements(TblSel.COMMENT_LINE)) {
 
@@ -105,7 +104,7 @@ public class TestHelper {
                 }
                 return true;
             }
-            getElement(TblSel.NEXT_PAGE).click();
+            getElement(TblSel.PAGINATION_NEXT_PAGE).click();
         }
         return false;
     }
@@ -118,7 +117,7 @@ public class TestHelper {
     public boolean verifyThatCommentsAreSortedByNumber() {
         Integer previousValue = 0;
         Integer currentValue;
-        Integer pages = getElements(TblSel.ALL_PAGINATION_ELEMENTS_WITHOUT_TEXT).size();
+        Integer pages = getElements(TblSel.PAGINATION_ELEMENTS_WITHOUT_TEXT).size();
         for (int i = 0; i < pages; i++) {
             for (WebElement item : getElements(TblSel.COMMENT_LINE)) {
                 currentValue = Integer.valueOf(item.findElement(SelectorsDataBase.
@@ -126,7 +125,7 @@ public class TestHelper {
                 if (currentValue < previousValue) return false;
                 previousValue = currentValue;
             }
-            getElement(TblSel.NEXT_PAGE).click();
+            getElement(TblSel.PAGINATION_NEXT_PAGE).click();
         }
         return true;
     }
@@ -134,7 +133,7 @@ public class TestHelper {
     public boolean verifyThatCommentsAreSortedByCommentText() {
         String previousValue = "";
         String currentValue;
-        Integer pages = getElements(TblSel.ALL_PAGINATION_ELEMENTS_WITHOUT_TEXT).size();
+        Integer pages = getElements(TblSel.PAGINATION_ELEMENTS_WITHOUT_TEXT).size();
         for (int i = 0; i < pages; i++) {
             for (WebElement item : getElements(TblSel.COMMENT_LINE)) {
                 currentValue = item.findElement(SelectorsDataBase.
@@ -142,7 +141,7 @@ public class TestHelper {
                 if (previousValue.compareTo(currentValue) > 0) return false;
                 previousValue = currentValue;
             }
-            getElement(TblSel.NEXT_PAGE).click();
+            getElement(TblSel.PAGINATION_NEXT_PAGE).click();
         }
         return true;
     }
@@ -150,7 +149,7 @@ public class TestHelper {
     public boolean verifyThatCommentsAreSortedByActive() {
         String previousValue = "";
         String currentValue;
-        Integer pages = getElements(TblSel.ALL_PAGINATION_ELEMENTS_WITHOUT_TEXT).size();
+        Integer pages = getElements(TblSel.PAGINATION_ELEMENTS_WITHOUT_TEXT).size();
         for (int i = 0; i < pages; i++) {
             for (WebElement item : getElements(TblSel.COMMENT_LINE)) {
                 currentValue = item.findElement(SelectorsDataBase.
@@ -158,19 +157,19 @@ public class TestHelper {
                 if (previousValue.compareTo(currentValue) > 0) return false;
                 previousValue = currentValue;
             }
-            getElement(TblSel.NEXT_PAGE).click();
+            getElement(TblSel.PAGINATION_NEXT_PAGE).click();
         }
         return true;
     }
 
     public boolean verifyFilterBy(Enum filteredItem, String keyToFilter) {
-        Integer pages = getElements(TblSel.ALL_PAGINATION_ELEMENTS_WITHOUT_TEXT).size();
+        Integer pages = getElements(TblSel.PAGINATION_ELEMENTS_WITHOUT_TEXT).size();
         for (int i = 0; i < pages; i++) {
             for (WebElement item : getElements(TblSel.COMMENT_LINE)) {
                 if (!item.findElement(SelectorsDataBase.getSelector(filteredItem, selectorsType))
                         .getText().contains(keyToFilter)) return false;
             }
-            getElement(TblSel.NEXT_PAGE).click();
+            getElement(TblSel.PAGINATION_NEXT_PAGE).click();
         }
         return true;
     }
@@ -180,7 +179,7 @@ public class TestHelper {
     }
 
     public boolean verifyHeaderUnderlined() {
-        return getElements(MainPg.HEADERS)
+        return getElements(TblSel.LINKS_FOR_SORTING)
                 .stream().allMatch(v -> v.getCssValue("text-decoration").equals("underline"));
     }
 }

@@ -1,7 +1,6 @@
 package com.wix.spirinmikhail.tests;
 
 import com.wix.spirinmikhail.helpers.Comment;
-import com.wix.spirinmikhail.helpers.SelectorsDataBase;
 import com.wix.spirinmikhail.helpers.TestHelper;
 import org.junit.*;
 import org.openqa.selenium.WebElement;
@@ -9,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import static org.junit.Assert.assertTrue;
 import static com.wix.spirinmikhail.helpers.SelectorsDataBase.MainPg;
 import static com.wix.spirinmikhail.helpers.SelectorsDataBase.EditPg;
+import static com.wix.spirinmikhail.helpers.SelectorsDataBase.TblSel;
 
 /**
  * Created by mikhails on 21.12.2015
@@ -47,7 +47,7 @@ public class CommentsTest {
         testHelper.getElement(EditPg.CAT_ZERO_CHECKBOX).click();
 
         System.out.println("Add it to current comment");
-        testHelper.getElement(EditPg.ADD_SELECTED_CATEGORY).click();
+        testHelper.getElement(EditPg.ADD_SELECTED_CATEGORY_BUTTON).click();
 
         System.out.println("Click Save and Return");
         testHelper.getElement(EditPg.SAVE_RETURN_BUTTON).click();
@@ -62,10 +62,10 @@ public class CommentsTest {
     public void duplicateCommentTest() {
 
         System.out.println("Select first comment");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.FIRST_COMMENT_CHECKBOX).click();
+        testHelper.getElement(TblSel.FIRST_COMMENT_CHECKBOX).click();
 
         System.out.println("Save text of the first comment");
-        String sourceCommentText = testHelper.getElement(SelectorsDataBase.SelectorsKeys.FIRST_COMMENT_TEXT).getText();
+        String sourceCommentText = testHelper.getElement(TblSel.FIRST_COMMENT_TEXT).getText();
 
         System.out.println("Duplicate selected comment");
         testHelper.getElement(MainPg.NAV_BUTTON, "Duplicate...").click();
@@ -87,7 +87,7 @@ public class CommentsTest {
         final String newCommentText = "New Name For Comment";
 
         System.out.println("Select first comment");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.FIRST_COMMENT_CHECKBOX).click();
+        testHelper.getElement(TblSel.FIRST_COMMENT_CHECKBOX).click();
 
         System.out.println("Edit selected comment - open popup");
         testHelper.getElement(MainPg.NAV_BUTTON, "Edit...").click();
@@ -109,10 +109,10 @@ public class CommentsTest {
     @Test
     public void deleteCommentTest() {
         System.out.println("Select first comment");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.FIRST_COMMENT_CHECKBOX).click();
+        testHelper.getElement(TblSel.FIRST_COMMENT_CHECKBOX).click();
 
         System.out.println("Get first comment text");
-        String commentText = testHelper.getElement(SelectorsDataBase.SelectorsKeys.FIRST_COMMENT_TEXT).getText();
+        String commentText = testHelper.getElement(TblSel.FIRST_COMMENT_TEXT).getText();
 
         System.out.println("Delete selected comment");
         testHelper.getElement(MainPg.NAV_BUTTON, "Delete").click();
@@ -144,7 +144,7 @@ public class CommentsTest {
         testHelper.getElement(EditPg.CAT_ZERO_CHECKBOX).click();
 
         System.out.println("Add it to current comment");
-        testHelper.getElement(EditPg.ADD_SELECTED_CATEGORY).click();
+        testHelper.getElement(EditPg.ADD_SELECTED_CATEGORY_BUTTON).click();
 
         System.out.println("Click Save and Return");
         testHelper.getElement(EditPg.SAVE_RETURN_BUTTON).click();
@@ -161,7 +161,7 @@ public class CommentsTest {
     @Test
     public void verifyCommentActivationTest() {
         System.out.println("Select first comment");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.FIRST_COMMENT_CHECKBOX).click();
+        testHelper.getElement(TblSel.FIRST_COMMENT_CHECKBOX).click();
 
         System.out.println("Edit selected comment - open popup");
         testHelper.getElement(MainPg.NAV_BUTTON, "Edit...").click();
