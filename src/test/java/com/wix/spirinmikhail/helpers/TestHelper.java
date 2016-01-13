@@ -65,8 +65,9 @@ public class TestHelper {
 
     public void quit() { driver.quit();  }
 
-    public boolean verifyThatCommentIsPresent(Comment comment) {
+    public Comment getFirstCommentMatchTemplate(Comment templateComment) {
         Integer currentNumber;
+        String currentNumberText;
         String currentCommentText;
         Boolean currentIsActive;
         String currentCategories;
@@ -79,34 +80,45 @@ public class TestHelper {
                 // if expected != null then check this field
                 // If null -> don't check this field
                 // if expected != current -> continue to next comment on page
-                if (comment.getUniqueNumber() != null) {
+                if (templateComment.getUniqueNumber() != null) {
                     currentNumber = Integer.valueOf(item.findElement(SelectorsDataBase.
                             getSelector(TblSel.COMMENT_NUMBER_IN_LINE, selectorsType)).getText());
-                    if (!currentNumber.equals(comment.getUniqueNumber())) continue;
+                    if (!currentNumber.equals(templateComment.getUniqueNumber())) continue;
                 }
 
-                if (comment.getCommentText() != null) {
+                if (templateComment.getCommentText() != null) {
                     currentCommentText = item.findElement(SelectorsDataBase.
                             getSelector(TblSel.COMMENT_TEXT_IN_LINE, selectorsType)).getText();
-                    if (!currentCommentText.equals(comment.getCommentText())) continue;
+                    if (!currentCommentText.equals(templateComment.getCommentText())) continue;
                 }
 
-                if (comment.getIsActive() != null) {
+                if (templateComment.getIsActive() != null) {
                     currentIsActive = item.findElement(SelectorsDataBase.
                             getSelector(TblSel.COMMENT_ACTIVE_IN_LINE, selectorsType)).getText().equals("V");
-                    if (!currentIsActive.equals(comment.getIsActive())) continue;
+                    if (!currentIsActive.equals(templateComment.getIsActive())) continue;
                 }
 
-                if (comment.getCategories() != null) {
+                if (templateComment.getCategories() != null) {
                     currentCategories = item.findElement(SelectorsDataBase.
                             getSelector(TblSel.COMMENT_CATEGORIES_IN_LINE, selectorsType)).getText();
-                    if (!currentCategories.equals(comment.getCategories())) continue;
+                    if (!currentCategories.equals(templateComment.getCategories())) continue;
                 }
-                return true;
+
+                currentNumberText = item.findElement(SelectorsDataBase.getSelector(TblSel.COMMENT_NUMBER_IN_LINE, selectorsType)).getText();
+                currentNumber = !(currentNumberText.equals("")) ? Integer.valueOf(currentNumberText) : null;
+                currentCommentText = item.findElement(SelectorsDataBase.getSelector(TblSel.COMMENT_TEXT_IN_LINE, selectorsType)).getText();
+                currentIsActive = item.findElement(SelectorsDataBase.getSelector(TblSel.COMMENT_ACTIVE_IN_LINE, selectorsType)).getText().equals("V");
+                currentCategories = item.findElement(SelectorsDataBase.getSelector(TblSel.COMMENT_CATEGORIES_IN_LINE, selectorsType)).getText();
+
+                return new Comment(currentNumber, currentCommentText, currentIsActive, currentCategories, item);
             }
             getElement(TblSel.PAGINATION_NEXT_PAGE).click();
         }
-        return false;
+        return null;
+    }
+
+    public boolean verifyThatCommentIsPresent(Comment comment) {
+        return !(getFirstCommentMatchTemplate(comment) == null);
     }
 
     public boolean verifyThatErrorMessageNumberFieldAppears(String expectedErrorMessage) {

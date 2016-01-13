@@ -35,6 +35,7 @@ public class CommentsTest {
     // task 1 - add comment and check if it's added
     @Test
     public void addCommentTest() {
+
         final String expectedCommentText = "qwerty";
 
         System.out.println("Create new comment");
