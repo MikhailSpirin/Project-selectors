@@ -1,17 +1,16 @@
-package com.wix.spirinmikhail;
+package com.wix.spirinmikhail.helpers;
 
-import org.apache.xpath.operations.Bool;
-import org.openqa.selenium.By;
+import com.wix.spirinmikhail.helpers.Comment;
+import com.wix.spirinmikhail.helpers.SelectorsDataBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
-import static com.wix.spirinmikhail.SelectorsDataBase.SelectorsKeys;
+import static com.wix.spirinmikhail.helpers.SelectorsDataBase.SelectorsKeys;
 
 /**
  * Created by mikhails on 24.12.2015
@@ -163,26 +162,12 @@ public class TestHelper {
         return true;
     }
 
-    public boolean verifyFilterByCategory(String categoryToFilter) {
+    public boolean verifyFilterBy(SelectorsKeys filteredItem, String keyToFilter) {
         Integer pages = getElements(SelectorsKeys.ALL_PAGINATION_ELEMENTS_WITHOUT_TEXT).size();
         for (int i = 0; i < pages; i++) {
             for (WebElement item : getElements(SelectorsKeys.COMMENT_LINE)) {
-                System.out.println(item.getText());
-                if (!item.findElement(SelectorsDataBase.getSelector(SelectorsKeys.COMMENT_CATEGORIES_IN_LINE, selectorsType))
-                        .getText().contains(categoryToFilter)) return false;
-            }
-            getElement(SelectorsKeys.NEXT_PAGE).click();
-        }
-        return true;
-    }
-
-    public boolean verifyFilterByStatus(String statusToFilter) {
-        Integer pages = getElements(SelectorsKeys.ALL_PAGINATION_ELEMENTS_WITHOUT_TEXT).size();
-        for (int i = 0; i < pages; i++) {
-            for (WebElement item : getElements(SelectorsKeys.COMMENT_LINE)) {
-                System.out.println(item.getText());
-                if (!item.findElement(SelectorsDataBase.getSelector(SelectorsKeys.COMMENT_ACTIVE_IN_LINE, selectorsType))
-                        .getText().contains(statusToFilter)) return false;
+                if (!item.findElement(SelectorsDataBase.getSelector(filteredItem, selectorsType))
+                        .getText().contains(keyToFilter)) return false;
             }
             getElement(SelectorsKeys.NEXT_PAGE).click();
         }
@@ -190,16 +175,11 @@ public class TestHelper {
     }
 
     public boolean verifyDividerWeight(String expectedWeight) {
-        WebElement divider = getElement(SelectorsKeys.DIVIDER);
-        String currentWeight = divider.getCssValue("height");
-        return (currentWeight.equals(expectedWeight));
+        return getElement(SelectorsKeys.DIVIDER).getCssValue("height").equals(expectedWeight);
     }
 
     public boolean verifyHeaderUnderlined() {
-        List<WebElement> headers = getElements(SelectorsKeys.HEADERS);
-        for (WebElement header : headers) {
-            if(!header.getCssValue("text-decoration").equals("underline")) return false;
-        }
-        return true;
+        return getElements(SelectorsKeys.HEADERS)
+                .stream().allMatch(v -> v.getCssValue("text-decoration").equals("underline"));
     }
 }

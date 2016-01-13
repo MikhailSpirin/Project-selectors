@@ -1,4 +1,4 @@
-package com.wix.spirinmikhail;
+package com.wix.spirinmikhail.helpers;
 
 import org.openqa.selenium.By;
 
@@ -11,10 +11,7 @@ import java.util.Map;
 public class SelectorsDataBase {
 
     public enum SelectorsKeys {
-        ACTION_BUTTON,
-        DUPLICATE_BUTTON,
-        EDIT_BUTTON,
-        DELETE_BUTTON,
+        NAV_BUTTON,
         COMMENT_TEXT_FIELD,
         CAT_ZERO_CHECKBOX,
         ADD_SELECTED_CATEGORY,
@@ -45,7 +42,7 @@ public class SelectorsDataBase {
     }
 
     private static Map<SelectorsKeys, Map> selectorsBase = new HashMap<SelectorsKeys, Map>(){{
-        put(SelectorsKeys.ACTION_BUTTON, new HashMap<String, String>() {{
+        put(SelectorsKeys.NAV_BUTTON, new HashMap<String, String>() {{
             put("CSS", "div#command-navigation input[value='%s']");
             put("XPATH", "//div[@id='command-navigation']/input[@value='%s']");
         }});

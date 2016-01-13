@@ -1,4 +1,4 @@
-package com.wix.spirinmikhail;
+package com.wix.spirinmikhail.helpers;
 
 import org.apache.xpath.operations.Bool;
 
