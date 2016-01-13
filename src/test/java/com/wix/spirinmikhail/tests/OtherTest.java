@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
+import static com.wix.spirinmikhail.helpers.SelectorsDataBase.MainPg;
 
 /**
  * Created by mikhails on 13.01.2016
@@ -22,11 +23,11 @@ public class OtherTest {
         testHelper.getURL("http://comments.azurewebsites.net/");
     }
 
-    //task 5 - resfresh page via link on page and via browser
+    //task 5 - refresh page via link on page and via browser
     @Test
     public void refreshPageTest() {
         System.out.println("Verify refresh via link on page");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.REFRESH_LINK).click();
+        testHelper.getElement(MainPg.REFRESH_LINK).click();
 
         System.out.println("Verify refresh via driver");
         testHelper.getDriver().navigate().refresh();
@@ -38,7 +39,7 @@ public class OtherTest {
         final String expectedColor = "rgba(255, 255, 255, 1)";
 
         System.out.println("Get header color");
-        String actualColor = testHelper.getElement(SelectorsDataBase.SelectorsKeys.MAIN_HEADER).getCssValue("color");
+        String actualColor = testHelper.getElement(MainPg.MAIN_HEADER).getCssValue("color");
 
         System.out.println("Verify that color is " + expectedColor);
         Assert.assertEquals("Color is not as expected", expectedColor, actualColor);

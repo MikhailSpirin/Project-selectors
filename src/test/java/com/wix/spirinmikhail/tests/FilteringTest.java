@@ -10,6 +10,9 @@ import org.openqa.selenium.support.ui.Select;
 
 import static org.junit.Assert.assertTrue;
 
+import static com.wix.spirinmikhail.helpers.SelectorsDataBase.MainPg;
+import static com.wix.spirinmikhail.helpers.SelectorsDataBase.TblSel;
+
 /**
  * Created by mikhails on 13.01.2016
  */
@@ -30,16 +33,16 @@ public class FilteringTest {
         final String categoryToFilter = "Cat3";
 
         System.out.println("Choose category " + categoryToFilter);
-        WebElement categoryDropdownElement = testHelper.getElement(SelectorsDataBase.SelectorsKeys.DROPDOWN_CATEGORY);
+        WebElement categoryDropdownElement = testHelper.getElement(MainPg.DROPDOWN_CATEGORY);
         Select categorySelect = new Select(categoryDropdownElement);
         categorySelect.selectByVisibleText(categoryToFilter);
 
         System.out.println("Click 'Apply'");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.FILTERING_BUTTON).click();
+        testHelper.getElement(MainPg.FILTERING_BUTTON).click();
 
         System.out.println("Verify that all comments are from - " + categoryToFilter);
         assertTrue("Some comment doesn't contain " + categoryToFilter,
-                testHelper.verifyFilterBy(SelectorsDataBase.SelectorsKeys.COMMENT_CATEGORIES_IN_LINE, categoryToFilter));
+                testHelper.verifyFilterBy(TblSel.COMMENT_CATEGORIES_IN_LINE, categoryToFilter));
     }
 
     //task 9.2 verifying filtering by status
@@ -48,16 +51,16 @@ public class FilteringTest {
         final String statusToFilter = "V";
 
         System.out.println("Choose status " + statusToFilter);
-        WebElement statusDropdownElement = testHelper.getElement(SelectorsDataBase.SelectorsKeys.DROPDOWN_STATUS);
+        WebElement statusDropdownElement = testHelper.getElement(MainPg.DROPDOWN_STATUS);
         Select statusSelect = new Select(statusDropdownElement);
         statusSelect.selectByVisibleText("Active");
 
         System.out.println("Click 'Apply'");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.FILTERING_BUTTON).click();
+        testHelper.getElement(MainPg.FILTERING_BUTTON).click();
 
         System.out.println("Verify that all comments have status - " + statusToFilter);
         assertTrue("Some comment is not " + statusToFilter,
-                testHelper.verifyFilterBy(SelectorsDataBase.SelectorsKeys.COMMENT_ACTIVE_IN_LINE, statusToFilter));
+                testHelper.verifyFilterBy(TblSel.COMMENT_ACTIVE_IN_LINE, statusToFilter));
 
     }
 
@@ -68,25 +71,25 @@ public class FilteringTest {
         final String statusToFilter = "V";
 
         System.out.println("Choose category " + categoryToFilter);
-        WebElement categoryDropdownElement = testHelper.getElement(SelectorsDataBase.SelectorsKeys.DROPDOWN_CATEGORY);
+        WebElement categoryDropdownElement = testHelper.getElement(MainPg.DROPDOWN_CATEGORY);
         Select categorySelect = new Select(categoryDropdownElement);
         categorySelect.selectByVisibleText(categoryToFilter);
 
         System.out.println("Click 'Apply'");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.FILTERING_BUTTON).click();
+        testHelper.getElement(MainPg.FILTERING_BUTTON).click();
 
         System.out.println("Choose status " + statusToFilter);
-        WebElement statusDropdownElement = testHelper.getElement(SelectorsDataBase.SelectorsKeys.DROPDOWN_STATUS);
+        WebElement statusDropdownElement = testHelper.getElement(MainPg.DROPDOWN_STATUS);
         Select statusSelect = new Select(statusDropdownElement);
         statusSelect.selectByVisibleText("Active");
 
         System.out.println("Click 'Apply'");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.FILTERING_BUTTON).click();
+        testHelper.getElement(MainPg.FILTERING_BUTTON).click();
 
         System.out.println("Verify that all comments have status - " + statusToFilter + " and category - " + categoryToFilter);
         assertTrue("Some comment has not expected status or category",
-                (testHelper.verifyFilterBy(SelectorsDataBase.SelectorsKeys.COMMENT_ACTIVE_IN_LINE, statusToFilter) &
-                        testHelper.verifyFilterBy(SelectorsDataBase.SelectorsKeys.COMMENT_CATEGORIES_IN_LINE, categoryToFilter)));
+                (testHelper.verifyFilterBy(TblSel.COMMENT_ACTIVE_IN_LINE, statusToFilter) &
+                        testHelper.verifyFilterBy(TblSel.COMMENT_CATEGORIES_IN_LINE, categoryToFilter)));
     }
 
     @After

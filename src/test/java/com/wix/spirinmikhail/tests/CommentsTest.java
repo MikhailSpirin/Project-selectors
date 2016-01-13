@@ -7,6 +7,8 @@ import org.junit.*;
 import org.openqa.selenium.WebElement;
 
 import static org.junit.Assert.assertTrue;
+import static com.wix.spirinmikhail.helpers.SelectorsDataBase.MainPg;
+import static com.wix.spirinmikhail.helpers.SelectorsDataBase.EditPg;
 
 /**
  * Created by mikhails on 21.12.2015
@@ -36,19 +38,19 @@ public class CommentsTest {
         final String expectedCommentText = "qwerty";
 
         System.out.println("Create new comment");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.NAV_BUTTON, "New...").click();
+        testHelper.getElement(MainPg.NAV_BUTTON, "New...").click();
 
         System.out.println("Fill in comment name" + expectedCommentText);
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.COMMENT_TEXT_FIELD).sendKeys(expectedCommentText);
+        testHelper.getElement(EditPg.COMMENT_TEXT_FIELD).sendKeys(expectedCommentText);
 
         System.out.println("Select Cat0 category");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.CAT_ZERO_CHECKBOX).click();
+        testHelper.getElement(EditPg.CAT_ZERO_CHECKBOX).click();
 
         System.out.println("Add it to current comment");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.ADD_SELECTED_CATEGORY).click();
+        testHelper.getElement(EditPg.ADD_SELECTED_CATEGORY).click();
 
         System.out.println("Click Save and Return");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.SAVE_RETURN_BUTTON).click();
+        testHelper.getElement(EditPg.SAVE_RETURN_BUTTON).click();
 
         System.out.println("Verify that comment " + expectedCommentText + " is exist");
         assertTrue("Comment is not added",
@@ -66,13 +68,13 @@ public class CommentsTest {
         String sourceCommentText = testHelper.getElement(SelectorsDataBase.SelectorsKeys.FIRST_COMMENT_TEXT).getText();
 
         System.out.println("Duplicate selected comment");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.NAV_BUTTON, "Duplicate...").click();
+        testHelper.getElement(MainPg.NAV_BUTTON, "Duplicate...").click();
 
         System.out.println("In opened popup delete number (for automatic generation");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.NUMBER_TEXT_FIELD).clear();
+        testHelper.getElement(EditPg.NUMBER_TEXT_FIELD).clear();
 
         System.out.println("Click 'Save and Return' button");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.SAVE_RETURN_BUTTON).click();
+        testHelper.getElement(EditPg.SAVE_RETURN_BUTTON).click();
 
         System.out.println("Verify that copied comment exist");
         assertTrue("Comment is not copied",
@@ -88,15 +90,15 @@ public class CommentsTest {
         testHelper.getElement(SelectorsDataBase.SelectorsKeys.FIRST_COMMENT_CHECKBOX).click();
 
         System.out.println("Edit selected comment - open popup");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.NAV_BUTTON, "Edit...").click();
+        testHelper.getElement(MainPg.NAV_BUTTON, "Edit...").click();
 
         System.out.println("Change text for comment");
-        WebElement commentField = testHelper.getElement(SelectorsDataBase.SelectorsKeys.COMMENT_TEXT_FIELD);
+        WebElement commentField = testHelper.getElement(EditPg.COMMENT_TEXT_FIELD);
         commentField.clear();
         commentField.sendKeys(newCommentText);
 
         System.out.println("Click 'Save and Return' button");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.SAVE_RETURN_BUTTON).click();
+        testHelper.getElement(EditPg.SAVE_RETURN_BUTTON).click();
 
         System.out.println("Verify that copied comment exist");
         assertTrue("Comment is not edited",
@@ -113,10 +115,10 @@ public class CommentsTest {
         String commentText = testHelper.getElement(SelectorsDataBase.SelectorsKeys.FIRST_COMMENT_TEXT).getText();
 
         System.out.println("Delete selected comment");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.NAV_BUTTON, "Delete").click();
+        testHelper.getElement(MainPg.NAV_BUTTON, "Delete").click();
 
         System.out.println("Approve deletion operation");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.DELETE_POPUP_YES_BUTTON).click();
+        testHelper.getElement(EditPg.DELETE_POPUP_YES_BUTTON).click();
 
         System.out.println("Verify that deleted comment is not exist");
         assertTrue("Comment is not deleted",
@@ -130,22 +132,22 @@ public class CommentsTest {
         final String expectedErrorMessage = "The Number field should contain value from 0 to 999 and should be unique";
 
         System.out.println("Create new comment");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.NAV_BUTTON, "New...").click();
+        testHelper.getElement(MainPg.NAV_BUTTON, "New...").click();
 
         System.out.println("Fill in comment name - quertyytrewq");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.COMMENT_TEXT_FIELD).sendKeys("quertyytrewq");
+        testHelper.getElement(EditPg.COMMENT_TEXT_FIELD).sendKeys("quertyytrewq");
 
         System.out.println("Fill in comment name - " + uniqueExistNumber);
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.NUMBER_TEXT_FIELD).sendKeys(String.valueOf(uniqueExistNumber));
+        testHelper.getElement(EditPg.NUMBER_TEXT_FIELD).sendKeys(String.valueOf(uniqueExistNumber));
 
         System.out.println("Select Cat0 category");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.CAT_ZERO_CHECKBOX).click();
+        testHelper.getElement(EditPg.CAT_ZERO_CHECKBOX).click();
 
         System.out.println("Add it to current comment");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.ADD_SELECTED_CATEGORY).click();
+        testHelper.getElement(EditPg.ADD_SELECTED_CATEGORY).click();
 
         System.out.println("Click Save and Return");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.SAVE_RETURN_BUTTON).click();
+        testHelper.getElement(EditPg.SAVE_RETURN_BUTTON).click();
 
         System.out.println("Verify that error message appears");
         assertTrue("Error message doesn't appear or it is wrong",
@@ -162,13 +164,13 @@ public class CommentsTest {
         testHelper.getElement(SelectorsDataBase.SelectorsKeys.FIRST_COMMENT_CHECKBOX).click();
 
         System.out.println("Edit selected comment - open popup");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.NAV_BUTTON, "Edit...").click();
+        testHelper.getElement(MainPg.NAV_BUTTON, "Edit...").click();
 
         System.out.println("Deactivate comment");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.STATUS_FIELD).click();
+        testHelper.getElement(EditPg.STATUS_FIELD).click();
 
         System.out.println("Click 'Save and Return' button");
-        testHelper.getElement(SelectorsDataBase.SelectorsKeys.SAVE_RETURN_BUTTON).click();
+        testHelper.getElement(EditPg.SAVE_RETURN_BUTTON).click();
 
         System.out.println("Verify that comment is changed");
         assertTrue("Comment is not changed",
