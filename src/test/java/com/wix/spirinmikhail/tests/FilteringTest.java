@@ -1,6 +1,5 @@
 package com.wix.spirinmikhail.tests;
 
-import com.wix.spirinmikhail.helpers.SelectorsDataBase;
 import com.wix.spirinmikhail.helpers.TestHelper;
 import org.junit.After;
 import org.junit.Before;

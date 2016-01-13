@@ -1,6 +1,7 @@
 package com.wix.spirinmikhail.helpers;
 
 import org.openqa.selenium.WebElement;
+import static com.wix.spirinmikhail.helpers.SelectorsDataBase.TblSel;
 
 /**
  * Created by mikhails on 08.01.2016
@@ -41,7 +42,7 @@ public class Comment {
         return categories;
     }
 
-    public WebElement getItem() {
-        return item;
+    public WebElement checkbox() {
+        return item.findElement(SelectorsDataBase.getSelector(TblSel.COMMENT_CHECKBOX, "CSS"));
     }
 }

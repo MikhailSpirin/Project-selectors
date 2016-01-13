@@ -35,7 +35,6 @@ public class CommentsTest {
     // task 1 - add comment and check if it's added
     @Test
     public void addCommentTest() {
-
         final String expectedCommentText = "qwerty";
 
         System.out.println("Create new comment");
@@ -155,14 +154,33 @@ public class CommentsTest {
                 testHelper.verifyThatErrorMessageNumberFieldAppears(expectedErrorMessage));
     }
 
-    // task 10.1 activation check ---
-    // very fast hardcoded check. Should be verified in another way -
-    // getting random comment with status active and changing it
-    // Deactivation check is similar
+    // task 10.1 activation check
     @Test
     public void verifyCommentActivationTest() {
-        System.out.println("Select first comment");
-        testHelper.getElement(TblSel.FIRST_COMMENT_CHECKBOX).click();
+        System.out.println("Select first comment that is deactivated");
+        Comment testComment = testHelper.getFirstCommentMatchTemplate(new Comment(null, null, false, null));
+        testComment.checkbox().click();
+
+        System.out.println("Edit selected comment - open popup");
+        testHelper.getElement(MainPg.NAV_BUTTON, "Edit...").click();
+
+        System.out.println("Activate comment");
+        testHelper.getElement(EditPg.STATUS_FIELD).click();
+
+        System.out.println("Click 'Save and Return' button");
+        testHelper.getElement(EditPg.SAVE_RETURN_BUTTON).click();
+
+        System.out.println("Verify that comment is changed");
+        assertTrue("Comment is not changed",
+                testHelper.verifyThatCommentIsPresent(new Comment(0, "Comment Text 0", true, "Cat0")));
+    }
+
+    // task 10.2 deactivation check
+    @Test
+    public void verifyCommentDeactivationTest() {
+        System.out.println("Select first comment that is activated");
+        Comment testComment = testHelper.getFirstCommentMatchTemplate(new Comment(null, null, true, null));
+        testComment.checkbox().click();
 
         System.out.println("Edit selected comment - open popup");
         testHelper.getElement(MainPg.NAV_BUTTON, "Edit...").click();

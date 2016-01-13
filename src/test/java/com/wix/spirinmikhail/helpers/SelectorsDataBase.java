@@ -44,6 +44,7 @@ public class SelectorsDataBase {
 
         // for table iteration
         COMMENT_LINE,
+        COMMENT_CHECKBOX,
         COMMENT_NUMBER_IN_LINE,
         COMMENT_TEXT_IN_LINE,
         COMMENT_ACTIVE_IN_LINE,
@@ -109,6 +110,11 @@ public class SelectorsDataBase {
         put(TblSel.FIRST_COMMENT_CHECKBOX, new HashMap<String, String>() {{
             put("CSS", "tbody tr:nth-of-type(1) td.checkedcolumn input[type=checkbox]");
             put("XPATH", "//tbody/tr[1]/td[@class='checkedcolumn']/input[@name='SelectedId']");
+        }});
+
+        put(TblSel.COMMENT_CHECKBOX, new HashMap<String, String>() {{
+            put("CSS", "td.checkedcolumn input[type=checkbox]");
+            put("XPATH", "td[@class='checkedcolumn']/input[@name='SelectedId']");
         }});
 
         put(TblSel.FIRST_COMMENT_TEXT, new HashMap<String, String>() {{
@@ -185,6 +191,7 @@ public class SelectorsDataBase {
             put("CSS", "section#main div hr");
             put("XPATH", "");
         }});
+
     }};
 
     public static By getSelector(Enum query, String type) {
