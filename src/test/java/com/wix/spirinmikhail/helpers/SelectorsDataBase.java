@@ -164,32 +164,32 @@ public class SelectorsDataBase {
 
         put(TblSel.LINKS_FOR_SORTING, new HashMap<String, String>() {{
             put("CSS", "table.webgrid thead tr.webgrid-header th a[href^='/?sort=%s']");
-            put("XPATH", "");
+            put("XPATH", "//table[@class='webgrid']/thead/tr[@class='webgrid-header']/th/a[contains(@href,'/?sort=%s')]");
         }});
 
         put(MainPg.DROPDOWN_CATEGORY, new HashMap<String, String>() {{
             put("CSS", "select#SelectedCateg");
-            put("XPATH", "");
+            put("XPATH", "//select[@id='SelectedCateg']");
         }});
 
         put(MainPg.DROPDOWN_STATUS, new HashMap<String, String>() {{
             put("CSS", "select#SelectedStatus");
-            put("XPATH", "");
+            put("XPATH", "//select[@id='SelectedStatus']");
         }});
 
         put(MainPg.FILTERING_BUTTON, new HashMap<String, String>() {{
             put("CSS", "input#applybutton");
-            put("XPATH", "");
+            put("XPATH", "//input[@id='applybutton']");
         }});
 
         put(EditPg.STATUS_FIELD, new HashMap<String, String>() {{
             put("CSS", "div.commenteditor input#Active");
-            put("XPATH", "");
+            put("XPATH", "//div[@class='commenteditor']/input[@id='Active']");
         }});
 
         put(MainPg.DIVIDER, new HashMap<String, String>() {{
             put("CSS", "section#main div hr");
-            put("XPATH", "");
+            put("XPATH", "//section[@id='main']/div/hr");
         }});
 
     }};
