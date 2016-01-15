@@ -122,8 +122,7 @@ public class TestHelper {
     }
 
     public boolean verifyThatErrorMessageNumberFieldAppears(String expectedErrorMessage) {
-        WebElement errorField = getElement(EditPg.ERROR_MESSAGE_FIELD);
-        return errorField.getText().equals(expectedErrorMessage);
+        return getElement(EditPg.ERROR_MESSAGE_FIELD).getText().equals(expectedErrorMessage);
     }
 
     public boolean verifyThatCommentsAreSortedByNumber() {
