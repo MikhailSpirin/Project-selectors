@@ -29,7 +29,7 @@ public class FilteringTest {
     //task 9.1 verifying filtering by category
     @Test
     public void verifyFilteringByCategoryTest() {
-        final String categoryToFilter = "Cat3";
+        final String categoryToFilter = "Cat4";
 
         System.out.println("Choose category " + categoryToFilter);
         WebElement categoryDropdownElement = testHelper.getElement(MainPg.DROPDOWN_CATEGORY);

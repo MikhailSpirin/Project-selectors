@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 
+import java.util.function.BiPredicate;
+
 import static org.junit.Assert.assertTrue;
 import static com.wix.spirinmikhail.helpers.SelectorsDataBase.TblSel;
 
@@ -36,7 +38,9 @@ public class SortingTest {
 
         System.out.println("Verify that comments are sorted by number");
         assertTrue("Comments are not sorted by number",
-                testHelper.verifyThatCommentsAreSortedByNumber());
+                testHelper.verifyThatCommentsAreSortedBy(TblSel.COMMENT_NUMBER_IN_LINE,
+                        (x, y) -> (((!x.equals("")) ? Integer.valueOf(x) : 0) > Integer.valueOf(y))
+                ));
     }
 
     //task 8.2 - sorting on comment text
@@ -52,7 +56,8 @@ public class SortingTest {
 
         System.out.println("Verify that comments are sorted by comment text");
         assertTrue("Comments are not sorted by comment text",
-                testHelper.verifyThatCommentsAreSortedByCommentText());
+                testHelper.verifyThatCommentsAreSortedBy(TblSel.COMMENT_TEXT_IN_LINE,
+                        (x, y) -> (x.compareTo(y) > 0)));
     }
 
     //task 8.3 - sorting on active
@@ -68,7 +73,8 @@ public class SortingTest {
 
         System.out.println("Verify that comments are sorted by number");
         assertTrue("Comments are not sorted by active",
-                testHelper.verifyThatCommentsAreSortedByActive());
+                testHelper.verifyThatCommentsAreSortedBy(TblSel.COMMENT_ACTIVE_IN_LINE,
+                        (x, y) -> (x.compareTo(y) > 0)));
     }
 
     @After

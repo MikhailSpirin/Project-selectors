@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
+import java.util.function.BiPredicate;
 import static com.wix.spirinmikhail.helpers.SelectorsDataBase.MainPg;
 import static com.wix.spirinmikhail.helpers.SelectorsDataBase.EditPg;
 import static com.wix.spirinmikhail.helpers.SelectorsDataBase.TblSel;
@@ -112,7 +113,7 @@ public class TestHelper {
 
                 return new Comment(currentNumber, currentCommentText, currentIsActive, currentCategories, item);
             }
-            getElement(TblSel.PAGINATION_NEXT_PAGE).click();
+            nextPageClicker();
         }
         return null;
     }
@@ -125,63 +126,32 @@ public class TestHelper {
         return getElement(EditPg.ERROR_MESSAGE_FIELD).getText().equals(expectedErrorMessage);
     }
 
-    public boolean verifyThatCommentsAreSortedByNumber() {
-        Integer previousValue = 0;
-        Integer currentValue;
-        Integer pages = getElements(TblSel.PAGINATION_ELEMENTS_WITHOUT_TEXT).size();
-        for (int i = 0; i < pages; i++) {
-            for (WebElement item : getElements(TblSel.COMMENT_LINE)) {
-                currentValue = Integer.valueOf(item.findElement(SelectorsDataBase.
-                        getSelector(TblSel.COMMENT_NUMBER_IN_LINE, selectorsType)).getText());
-                if (currentValue < previousValue) return false;
-                previousValue = currentValue;
-            }
-            getElement(TblSel.PAGINATION_NEXT_PAGE).click();
-        }
-        return true;
-    }
-
-    public boolean verifyThatCommentsAreSortedByCommentText() {
+    public boolean verifyThatCommentsAreSortedBy(TblSel selector, BiPredicate<String, String> xIsGreaterThanY) {
         String previousValue = "";
         String currentValue;
+        int i = 0;
         Integer pages = getElements(TblSel.PAGINATION_ELEMENTS_WITHOUT_TEXT).size();
-        for (int i = 0; i < pages; i++) {
+        do {
             for (WebElement item : getElements(TblSel.COMMENT_LINE)) {
-                currentValue = item.findElement(SelectorsDataBase.
-                        getSelector(TblSel.COMMENT_TEXT_IN_LINE, selectorsType)).getText();
-                if (previousValue.compareTo(currentValue) > 0) return false;
+                currentValue = item.findElement(SelectorsDataBase.getSelector(selector, selectorsType)).getText();
+                if (xIsGreaterThanY.test(previousValue, currentValue)) return false;
                 previousValue = currentValue;
             }
-            getElement(TblSel.PAGINATION_NEXT_PAGE).click();
-        }
-        return true;
-    }
-
-    public boolean verifyThatCommentsAreSortedByActive() {
-        String previousValue = "";
-        String currentValue;
-        Integer pages = getElements(TblSel.PAGINATION_ELEMENTS_WITHOUT_TEXT).size();
-        for (int i = 0; i < pages; i++) {
-            for (WebElement item : getElements(TblSel.COMMENT_LINE)) {
-                currentValue = item.findElement(SelectorsDataBase.
-                        getSelector(TblSel.COMMENT_ACTIVE_IN_LINE, selectorsType)).getText();
-                if (previousValue.compareTo(currentValue) > 0) return false;
-                previousValue = currentValue;
-            }
-            getElement(TblSel.PAGINATION_NEXT_PAGE).click();
-        }
+            nextPageClicker();
+        } while (i < pages);
         return true;
     }
 
     public boolean verifyFilterBy(Enum filteredItem, String keyToFilter) {
         Integer pages = getElements(TblSel.PAGINATION_ELEMENTS_WITHOUT_TEXT).size();
-        for (int i = 0; i < pages; i++) {
-            for (WebElement item : getElements(TblSel.COMMENT_LINE)) {
-                if (!item.findElement(SelectorsDataBase.getSelector(filteredItem, selectorsType))
-                        .getText().contains(keyToFilter)) return false;
-            }
-            getElement(TblSel.PAGINATION_NEXT_PAGE).click();
-        }
+        int i = 0;
+        do {
+            if (getElements(TblSel.COMMENT_LINE).stream()
+                    .noneMatch(item -> item.findElement(SelectorsDataBase.getSelector(filteredItem, selectorsType))
+                            .getText().contains(keyToFilter))) return false;
+            nextPageClicker();
+            i++;
+        } while (i < pages);
         return true;
     }
 
@@ -192,5 +162,12 @@ public class TestHelper {
     public boolean verifyHeaderUnderlined() {
         return getElements(TblSel.LINKS_FOR_SORTING)
                 .stream().allMatch(v -> v.getCssValue("text-decoration").equals("underline"));
+    }
+
+
+
+    private void nextPageClicker() {
+        if (getElements(TblSel.PAGINATION_NEXT_PAGE).size() != 0)
+            getElement(TblSel.PAGINATION_NEXT_PAGE).click();
     }
 }
