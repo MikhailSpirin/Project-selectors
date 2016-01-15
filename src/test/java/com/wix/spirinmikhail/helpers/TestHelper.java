@@ -75,7 +75,8 @@ public class TestHelper {
 
         driver.get("http://comments.azurewebsites.net/");
         Integer pages = getElements(TblSel.PAGINATION_ELEMENTS_WITHOUT_TEXT).size();
-        for (int i = 0; i < pages; i++) {
+        int i =0;
+        do {
             for (WebElement item : getElements(TblSel.COMMENT_LINE)) {
 
                 // if expected != null then check this field
@@ -114,7 +115,7 @@ public class TestHelper {
                 return new Comment(currentNumber, currentCommentText, currentIsActive, currentCategories, item);
             }
             nextPageClicker();
-        }
+        } while (i < pages);
         return null;
     }
 
